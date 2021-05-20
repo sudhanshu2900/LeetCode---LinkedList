@@ -1,0 +1,53 @@
+PROBLEM LINK: https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+SOLUTION:
+
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+    {
+        ListNode *tempA = headA;
+        ListNode *tempB = headB;
+        int lenA=0, lenB=0;
+        
+        while(tempA!=NULL && tempA->next!=NULL){                  //Calculate length of Linked list 1
+            lenA++;
+            tempA=tempA->next;
+        }
+        
+        
+        while(tempB!=NULL && tempB->next!=NULL){                  //Calculate length of Linked list 2
+            lenB++;
+            tempB=tempB->next;
+        }
+       
+        
+        if(lenB<lenA){                                          //Here in this problem we assume that linked list 2 have large length than linked list 1
+            ListNode *temp = headA;                             //So, if len(LL2) < len(LL1) than we simply interchange the head pointers of both LL.
+            headA = headB;
+            headB = temp;
+        }
+        
+        int ActLen = abs(lenB-lenA);                            //Difference of length (ActLen) of both LL
+        ListNode *run = headB;                                  //put 'run' pointer on head of LL2
+        
+        for(int i=0;i<ActLen;i++){                              //Traverse 'run' pointer with 'ActLen' length in LL2 and place a pointer after 'ActLen' node.
+            run=run->next;
+        }
+        
+        ListNode *pos = headA;                                  //put 'pos' pointer to head of LL1
+        
+        while(pos!=NULL && run!=NULL)                           //Now simply traverse 'run' and 'pos' together and check whether both poinetrs point to 
+        {                                                       //same node or not.
+            if(pos==run){
+                return pos;
+            }
+            pos=pos->next;
+            run=run->next;
+        }
+        
+        return NULL;        
+    }
+    
+    
+    
+    
+    
