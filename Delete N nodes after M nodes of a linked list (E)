@@ -1,0 +1,35 @@
+Problem solved at GFG because it is locked in Leetcode.
+
+PROBLEM LINK: https://practice.geeksforgeeks.org/problems/delete-n-nodes-after-m-nodes-of-a-linked-list/1#
+
+
+SOLUTION:
+
+void linkdelete(struct Node  *head, int M, int N)
+    {
+        Node *start = head;
+        
+        while(start!=NULL){
+            int a=M-1, b=N;
+            while(start!=NULL && a){
+                a--;
+                start=start->next;
+            }
+            
+            if(start==NULL) return;
+            
+            Node *temp=start->next;
+            while(temp!=NULL && b){
+                b--;
+                temp=temp->next;
+            }
+            
+            start->next = temp;
+            start = start->next;
+        }
+    }
+    
+    
+    
+    
+    
