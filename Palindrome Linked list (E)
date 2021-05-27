@@ -1,0 +1,38 @@
+PROBLEM LINK: https://leetcode.com/problems/palindrome-linked-list/
+
+SOLUTION:
+
+bool isPalindrome(ListNode* head) {
+        
+        ListNode *slow = head;
+        ListNode *fast = head;
+        
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+               
+        ListNode *temp = NULL;
+        ListNode *pre = NULL;
+        ListNode *s = slow->next;
+        
+        while(s!=NULL){
+            temp = s->next;
+            s->next = pre;
+            pre = s;
+            s = temp;            
+        }
+        
+        while(pre != NULL){
+            if(head->val != pre->val) return false;
+            
+            head = head->next;
+            pre = pre->next;            
+        }
+        return true;
+    }
+    
+    
+    
+    
+    
