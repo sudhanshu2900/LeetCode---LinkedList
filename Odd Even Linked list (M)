@@ -1,0 +1,31 @@
+PROBLEM LINK: https://leetcode.com/problems/odd-even-linked-list/
+
+
+SOLUTION:
+
+ListNode* oddEvenList(ListNode* head) {
+        
+        if(head == NULL || head->next == NULL || head->next->next == NULL) 
+            return head;
+        
+        ListNode* oddPtr = head;
+        ListNode* evenPtr = head->next;
+        ListNode* tempPtr = head->next;
+        
+        while(evenPtr != NULL && evenPtr->next != NULL){
+            
+            oddPtr->next = evenPtr->next;
+            oddPtr = oddPtr->next;
+            evenPtr->next = oddPtr->next;
+            evenPtr = evenPtr->next;
+        }
+        
+        oddPtr->next = tempPtr;
+        
+        return head;
+    
+}
+
+
+
+
