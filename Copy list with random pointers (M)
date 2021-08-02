@@ -1,0 +1,41 @@
+PROBLEM LINK: https://leetcode.com/problems/copy-list-with-random-pointer/
+
+
+CODE:
+
+Node* copyRandomList(Node* head) {
+        Node *travers = head;
+        while(travers != NULL){
+            Node *tempNode = new Node(travers->val);
+            tempNode->next = travers->next;
+            travers->next = tempNode;
+            travers = travers->next->next;
+        }
+        
+        travers = head;
+        while(travers != NULL){
+            if(travers->random != NULL)
+                travers->next->random = travers->random->next;
+            travers = travers->next->next;
+        }
+        
+        travers = head;
+        Node* dummy = new Node(0);
+        Node *copy = dummy, *forward = head;
+        
+        while(travers != NULL){
+            forward = travers->next->next;
+            copy->next = travers->next;
+            copy = copy->next;
+            travers->next = forward;
+            travers = forward;
+        }
+        
+        return dummy->next;    
+    
+    }
+    
+    
+    
+    
+    
